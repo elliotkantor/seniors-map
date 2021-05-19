@@ -46,10 +46,20 @@ def unpack_names(df):
     new_df.columns = ["Student", "School"]
     new_df2.columns = ["Student", "Address"]
 
-    new_df["Address"] = new_df2["Address"]
+    new_df["School Address"] = new_df2["Address"]
     return new_df
 
 
 sheet = get_sheet()
 df = get_dataframe(sheet)
 df = unpack_names(df)
+
+st.dataframe(df)
+
+"## Search for a student"
+student_query = st.text_input("Enter student name")
+results = df.loc[df.Student.str.contains(student_query.title())]
+if student_query and results.shape[0] > 0:
+    st.write(results)
+else:
+    "No results found"
