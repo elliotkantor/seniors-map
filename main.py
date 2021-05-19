@@ -63,3 +63,8 @@ if student_query and results.shape[0] > 0:
     st.write(results)
 else:
     "No results found"
+
+"## Search by school"
+chosen_schools = st.multiselect("Select one or more schools", list(df.School.unique()))
+if chosen_schools:
+    st.write(df.loc[df["School"].isin(chosen_schools)])
